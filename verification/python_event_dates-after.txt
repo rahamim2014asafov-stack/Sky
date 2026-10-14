@@ -1,0 +1,15 @@
+test_empty_input (__main__.EventFilterTests.test_empty_input) ... ok
+test_explicit_offset_is_normalized_to_report_zone (__main__.EventFilterTests.test_explicit_offset_is_normalized_to_report_zone) ... ok
+test_fall_back_includes_both_repeated_hours_and_late_boundary (__main__.EventFilterTests.test_fall_back_includes_both_repeated_hours_and_late_boundary) ... ok
+test_input_order_and_values_are_preserved (__main__.EventFilterTests.test_input_order_and_values_are_preserved) ... ok
+test_invalid_zone_is_rejected_even_for_empty_input (__main__.EventFilterTests.test_invalid_zone_is_rejected_even_for_empty_input) ... ok
+test_late_utc_event_can_belong_to_next_local_day (__main__.EventFilterTests.test_late_utc_event_can_belong_to_next_local_day) ... ok
+test_naive_timestamp_is_rejected (__main__.EventFilterTests.test_naive_timestamp_is_rejected) ... ok
+test_previous_utc_date_can_belong_to_local_day (__main__.EventFilterTests.test_previous_utc_date_can_belong_to_local_day) ... ok
+test_spring_forward_day_has_23_hours (__main__.EventFilterTests.test_spring_forward_day_has_23_hours) ... ok
+test_utc_day_boundaries (__main__.EventFilterTests.test_utc_day_boundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.005s
+
+OK
