@@ -1,0 +1,177 @@
+TAP version 13
+# Subtest: zero, false, and empty strings remain explicit parameters
+not ok 1 - zero, false, and empty strings remain explicit parameters
+  ---
+  duration_ms: 1.792169
+  type: 'test'
+  location: '/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:10:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + ''
+    - 'page=0&archived=false&search='
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'page=0&archived=false&search='
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:11:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: ordinary scalar filters retain order
+ok 2 - ordinary scalar filters retain order
+  ---
+  duration_ms: 0.230321
+  type: 'test'
+  ...
+# Subtest: null and undefined are omitted
+ok 3 - null and undefined are omitted
+  ---
+  duration_ms: 0.108481
+  type: 'test'
+  ...
+# Subtest: arrays encode repeated keys, including commas inside one selection
+not ok 4 - arrays encode repeated keys, including commas inside one selection
+  ---
+  duration_ms: 1.011766
+  type: 'test'
+  location: '/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   'a,b,python,python'
+    -   'a,b',
+    -   'python',
+    -   'python'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'a,b'
+    1: 'python'
+    2: 'python'
+  actual:
+    0: 'a,b,python,python'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:24:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: array values follow the same nullish and falsy rules
+not ok 5 - array values follow the same nullish and falsy rules
+  ---
+  duration_ms: 0.330498
+  type: 'test'
+  location: '/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:27:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   ',0,,false,'
+    -   '0',
+    -   'false',
+    -   ''
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: '0'
+    1: 'false'
+    2: ''
+  actual:
+    0: ',0,,false,'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:29:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: empty arrays and empty parameter objects produce no parameters
+not ok 6 - empty arrays and empty parameter objects produce no parameters
+  ---
+  duration_ms: 0.182169
+  type: 'test'
+  location: '/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:32:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'tag=' !== ''
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ''
+  actual: 'tag='
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:33:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: reserved characters and Unicode round-trip without injecting a parameter
+ok 7 - reserved characters and Unicode round-trip without injecting a parameter
+  ---
+  duration_ms: 0.336147
+  type: 'test'
+  ...
+# Subtest: input arrays and objects are not changed
+ok 8 - input arrays and objects are not changed
+  ---
+  duration_ms: 0.206235
+  type: 'test'
+  ...
+# Subtest: unsupported objects, nested arrays, and nonfinite numbers are rejected
+not ok 9 - unsupported objects, nested arrays, and nonfinite numbers are rejected
+  ---
+  duration_ms: 0.356848
+  type: 'test'
+  location: '/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:51:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (TypeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/js_query_filters/test_query.mjs:53:12)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 4
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 92.272303
