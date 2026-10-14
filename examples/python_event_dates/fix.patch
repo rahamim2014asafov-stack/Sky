@@ -1,0 +1,27 @@
+--- before.py
++++ after.py
+@@ -1,13 +1,18 @@
+-"""Original demonstration implementation: ignores the report's time zone."""
++"""Select events by calendar date in an explicit reporting time zone."""
+ 
+ from datetime import date, datetime
++from zoneinfo import ZoneInfo
+ 
+ 
+ def filter_events_for_local_day(
+     events: list[dict], target_day: date, time_zone: str
+ ) -> list[dict]:
+-    return [
+-        event
+-        for event in events
+-        if datetime.fromisoformat(event["occurred_at"]).date() == target_day
+-    ]
++    zone = ZoneInfo(time_zone)
++    selected = []
++    for event in events:
++        timestamp = datetime.fromisoformat(event["occurred_at"])
++        if timestamp.tzinfo is None or timestamp.utcoffset() is None:
++            raise ValueError("occurred_at must include a UTC offset or Z")
++        if timestamp.astimezone(zone).date() == target_day:
++            selected.append(event)
++    return selected
