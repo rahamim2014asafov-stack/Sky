@@ -1,0 +1,121 @@
+test_empty_input (__main__.EventFilterTests.test_empty_input) ... ok
+test_explicit_offset_is_normalized_to_report_zone (__main__.EventFilterTests.test_explicit_offset_is_normalized_to_report_zone) ... FAIL
+test_fall_back_includes_both_repeated_hours_and_late_boundary (__main__.EventFilterTests.test_fall_back_includes_both_repeated_hours_and_late_boundary) ... FAIL
+test_input_order_and_values_are_preserved (__main__.EventFilterTests.test_input_order_and_values_are_preserved) ... ok
+test_invalid_zone_is_rejected_even_for_empty_input (__main__.EventFilterTests.test_invalid_zone_is_rejected_even_for_empty_input) ... FAIL
+test_late_utc_event_can_belong_to_next_local_day (__main__.EventFilterTests.test_late_utc_event_can_belong_to_next_local_day) ... FAIL
+test_naive_timestamp_is_rejected (__main__.EventFilterTests.test_naive_timestamp_is_rejected) ... FAIL
+test_previous_utc_date_can_belong_to_local_day (__main__.EventFilterTests.test_previous_utc_date_can_belong_to_local_day) ... FAIL
+test_spring_forward_day_has_23_hours (__main__.EventFilterTests.test_spring_forward_day_has_23_hours) ... FAIL
+test_utc_day_boundaries (__main__.EventFilterTests.test_utc_day_boundaries) ... ok
+
+======================================================================
+FAIL: test_explicit_offset_is_normalized_to_report_zone (__main__.EventFilterTests.test_explicit_offset_is_normalized_to_report_zone)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 51, in test_explicit_offset_is_normalized_to_report_zone
+    self.assertEqual(select(events, date(2026, 1, 14), "UTC"), events)
+AssertionError: Lists differ: [] != [{'id': 'offset', 'occurred_at': '2026-01-15T00:30:00+09:00'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 'offset', 'occurred_at': '2026-01-15T00:30:00+09:00'}
+
+- []
++ [{'id': 'offset', 'occurred_at': '2026-01-15T00:30:00+09:00'}]
+
+======================================================================
+FAIL: test_fall_back_includes_both_repeated_hours_and_late_boundary (__main__.EventFilterTests.test_fall_back_includes_both_repeated_hours_and_late_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 72, in test_fall_back_includes_both_repeated_hours_and_late_boundary
+    self.assertEqual(
+AssertionError: Lists differ: [{'id[165 chars]30:00Z'}] != [{'id[165 chars]30:00Z'}, {'id': 'end', 'occurred_at': '2026-11-02T04:59:59Z'}]
+
+Second list contains 1 additional elements.
+First extra element 3:
+{'id': 'end', 'occurred_at': '2026-11-02T04:59:59Z'}
+
+  [{'id': 'start', 'occurred_at': '2026-11-01T04:00:00Z'},
+   {'id': 'first_0130', 'occurred_at': '2026-11-01T05:30:00Z'},
+-  {'id': 'second_0130', 'occurred_at': '2026-11-01T06:30:00Z'}]
+?                                                              ^
+
++  {'id': 'second_0130', 'occurred_at': '2026-11-01T06:30:00Z'},
+?                                                              ^
+
++  {'id': 'end', 'occurred_at': '2026-11-02T04:59:59Z'}]
+
+======================================================================
+FAIL: test_invalid_zone_is_rejected_even_for_empty_input (__main__.EventFilterTests.test_invalid_zone_is_rejected_even_for_empty_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 94, in test_invalid_zone_is_rejected_even_for_empty_input
+    with self.assertRaises(ZoneInfoNotFoundError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ZoneInfoNotFoundError not raised
+
+======================================================================
+FAIL: test_late_utc_event_can_belong_to_next_local_day (__main__.EventFilterTests.test_late_utc_event_can_belong_to_next_local_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 45, in test_late_utc_event_can_belong_to_next_local_day
+    self.assertEqual(
+AssertionError: Lists differ: [{'id': 'tomorrow', 'occurred_at': '2026-01-15T22:15:00Z'}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'id': 'tomorrow', 'occurred_at': '2026-01-15T22:15:00Z'}
+
+- [{'id': 'tomorrow', 'occurred_at': '2026-01-15T22:15:00Z'}]
++ []
+
+======================================================================
+FAIL: test_naive_timestamp_is_rejected (__main__.EventFilterTests.test_naive_timestamp_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 77, in test_naive_timestamp_is_rejected
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_previous_utc_date_can_belong_to_local_day (__main__.EventFilterTests.test_previous_utc_date_can_belong_to_local_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 39, in test_previous_utc_date_can_belong_to_local_day
+    self.assertEqual(
+AssertionError: Lists differ: [] != [{'id': 'early', 'occurred_at': '2026-01-14T22:15:00Z'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 'early', 'occurred_at': '2026-01-14T22:15:00Z'}
+
+- []
++ [{'id': 'early', 'occurred_at': '2026-01-14T22:15:00Z'}]
+
+======================================================================
+FAIL: test_spring_forward_day_has_23_hours (__main__.EventFilterTests.test_spring_forward_day_has_23_hours)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/6282cf7a91db/bugfix-portfolio/examples/python_event_dates/test_event_filter.py", line 60, in test_spring_forward_day_has_23_hours
+    self.assertEqual(
+AssertionError: Lists differ: [{'id': 'previous', 'occurred_at': '2026-03-08T04:[60 chars]0Z'}] != [{'id': 'start', 'occurred_at': '2026-03-08T05:00:[55 chars]9Z'}]
+
+First differing element 0:
+{'id': 'previous', 'occurred_at': '2026-03-08T04:59:59Z'}
+{'id': 'start', 'occurred_at': '2026-03-08T05:00:00Z'}
+
+- [{'id': 'previous', 'occurred_at': '2026-03-08T04:59:59Z'},
+-  {'id': 'start', 'occurred_at': '2026-03-08T05:00:00Z'}]
+? ^                                                      ^
+
++ [{'id': 'start', 'occurred_at': '2026-03-08T05:00:00Z'},
+? ^                                                      ^
+
++  {'id': 'end', 'occurred_at': '2026-03-09T03:59:59Z'}]
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+FAILED (failures=7)
