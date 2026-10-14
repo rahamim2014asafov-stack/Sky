@@ -1,1 +1,33 @@
+name: Read-only GitHub bounty scout
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '13 2,8,14,20 * * *'
+permissions:
+  contents: read
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Offline unit tests
+        run: python -m unittest discover -s . -p 'test_bounty_scout.py' -v
+      - name: Public issue search (read-only)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python github_bounty_scout.py --output bounty_leads.json --markdown bounty_leads.md
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bounty-scout-results
+          path: |
+            bounty_leads.json
+            bounty_leads.md
+          if-no-files-found: warn
+          retention-days: 14
 
