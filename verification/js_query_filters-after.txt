@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: zero, false, and empty strings remain explicit parameters
+ok 1 - zero, false, and empty strings remain explicit parameters
+  ---
+  duration_ms: 0.848915
+  type: 'test'
+  ...
+# Subtest: ordinary scalar filters retain order
+ok 2 - ordinary scalar filters retain order
+  ---
+  duration_ms: 0.163252
+  type: 'test'
+  ...
+# Subtest: null and undefined are omitted
+ok 3 - null and undefined are omitted
+  ---
+  duration_ms: 0.125546
+  type: 'test'
+  ...
+# Subtest: arrays encode repeated keys, including commas inside one selection
+ok 4 - arrays encode repeated keys, including commas inside one selection
+  ---
+  duration_ms: 0.782186
+  type: 'test'
+  ...
+# Subtest: array values follow the same nullish and falsy rules
+ok 5 - array values follow the same nullish and falsy rules
+  ---
+  duration_ms: 0.154208
+  type: 'test'
+  ...
+# Subtest: empty arrays and empty parameter objects produce no parameters
+ok 6 - empty arrays and empty parameter objects produce no parameters
+  ---
+  duration_ms: 0.157162
+  type: 'test'
+  ...
+# Subtest: reserved characters and Unicode round-trip without injecting a parameter
+ok 7 - reserved characters and Unicode round-trip without injecting a parameter
+  ---
+  duration_ms: 0.225613
+  type: 'test'
+  ...
+# Subtest: input arrays and objects are not changed
+ok 8 - input arrays and objects are not changed
+  ---
+  duration_ms: 0.334555
+  type: 'test'
+  ...
+# Subtest: unsupported objects, nested arrays, and nonfinite numbers are rejected
+ok 9 - unsupported objects, nested arrays, and nonfinite numbers are rejected
+  ---
+  duration_ms: 0.60214
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.735114
